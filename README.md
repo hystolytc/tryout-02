@@ -4,7 +4,7 @@ created by: Muhammad Ayyub email: melife4@gmail.com
 
 ## How to Use
 
-for first install use npm install
+for first install use npm start
 
 ## TODOLIST
 
