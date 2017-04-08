@@ -5,7 +5,7 @@ const TodoList = (props) => {
     return(
         <ul className="App">
         {props.items.map(item => (
-          <li key={item.id}>{item.text}</li>
+          <li key={item.id}><p>{item.text}</p></li>
         ))}
       </ul>
     )

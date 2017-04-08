@@ -12,10 +12,16 @@ class App extends Component {
     this.state = {items: [], text: ''};
   }
 
+  componentDidMount() {
+    this.getData();
+  }
+
   getData(){
     axios.get('http://localhost:7654/')
-    .then((response) => 
-    this.setState({items: {id: Date.now, text: response.data}}))
+    .then((response) => {
+      this.setState({items: response.data})
+      console.log(response)
+    })
   }
 
   handleChange(e) {
@@ -25,12 +31,7 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     axios.post('http://localhost:7654/', {arrData: this.state.text})
-    .then(() => {
-      this.setState((prevState) => ({
-        items: prevState.items.concat(this.state.text),
-        text: ''
-      }));
-    })
+    .then(() => this.getData());
   }
 
   render() {
