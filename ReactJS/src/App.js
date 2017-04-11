@@ -9,7 +9,10 @@ class App extends Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {items: [], text: ''};
+    this.state = {
+      items: [], 
+      text: ''
+    };
   }
 
   componentDidMount() {
@@ -19,8 +22,9 @@ class App extends Component {
   getData(){
     axios.get('http://localhost:7654/')
     .then((response) => {
-      this.setState({items: response.data})
-      console.log(response)
+      this.setState({
+        items: response.data
+      })
     })
   }
 
@@ -30,13 +34,24 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    axios.post('http://localhost:7654/', {arrData: this.state.text})
-    .then(() => this.getData());
+
+    let newItem = {
+      id: Date.now(),
+      text: this.state.text
+    }
+
+    axios.post('http://localhost:7654/', {data: newItem})
+    .then(() => {
+      this.getData()
+      this.setState({
+        text: ''
+      })
+    });
   }
 
   render() {
     return (
-      <div className="App">
+      <div>
         <h3>TODO</h3>
         <TodoList items={this.state.items} />
         <form onSubmit={this.handleSubmit}>

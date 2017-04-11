@@ -13,16 +13,14 @@ app.use(bp.json())
 app.use(bp.urlencoded({extended:true}))
 
 app.get('/', (req,res) => {
-    res.send(arr.map((item, id) => {
-        return {id, text: item}
-    }))
+    res.send(arr)
 })
 
 app.post('/', (req,res) => {
-    console.log(req.body)
-    arr.push(req.body.arrData)
+    arr.push(req.body.data)
+    res.send('berhasil')
 })
 
 app.listen(7654, () => {
-    console.log('listen')
+    console.log('server listening...')
 })
